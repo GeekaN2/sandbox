@@ -1,0 +1,145 @@
+<style>
+  /**
+  #f45a3b, #000000, #d8d8d8, #ﬀ0000, #999999, #666666, #222222, #ﬀﬀﬀ. 
+  */
+  html, body {
+      margin: 0;
+      padding: 0;
+  }
+
+  .wrapper {
+      width: 1000px;
+      height: 1000px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding-top: 105px;
+      padding-left: 250px;
+  }
+
+  .body {
+      width: 540px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+  }
+
+  .flag {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      margin-left: 90px;
+  }
+
+  .cutlet {
+      width: 520px;
+      height: 130px;
+      background: #f45a3b;
+      border-bottom-left-radius: 25px;
+      border-bottom-right-radius: 25px;
+      margin-left: -5px;
+  }
+
+  .ketchup {
+      width: 540px;
+      height: 15px;
+      background: #f00;
+      border-radius: 10px;
+      margin-left: -5px;
+  }
+
+  .black_bun {
+      width: 480px;
+      height: 110px;
+      clip-path: polygon(0 10px, 10px 0, 475px 0, 100% 10px, 100% 40px, 415px 100%, 70px 100%, 0 40px);
+      background: #222;
+  }
+
+  .spicy_meatballs {
+      width: 480px;
+      margin-top: -70px;
+      z-index: 2;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+  }
+
+  .spicy_meatballs__meatball {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: #000;
+  }
+
+  .white_bun {
+      width: 525px;
+      height: 100px;
+      background: linear-gradient(to bottom, #d9d8d8 0%, #d9d8d8 50%, #fff0 50%, #fff0 100%);
+      margin-bottom: -50px;
+      border-top-left-radius: 50px;
+      border-top-right-radius: 50%;
+  }
+
+  .black_cap {
+      position: relative;
+      width: 75px;
+      height: 55px;
+      background: #000;
+  }
+  
+  .black_cap:after {
+      content: ''; 
+      position: absolute;
+      left: -20px;
+      bottom: 0;
+      border: 20px solid transparent; 
+      border-right: 0;
+      border-bottom: 55px solid #000;
+  }
+
+  .gray_cap {
+      width: 55px;
+      height: 40px;
+      background: linear-gradient(to bottom, #000 0%, #000 18%, #666666 18%, #666666 100%);
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      margin-left: 10px;
+  }
+
+  .toothpick {
+      position: relative;
+      width: 5px;
+      height: 320px;
+      background: #999999;
+      margin-left: 15px;
+  }
+
+  .toothpick:after {
+      content: '';
+      position: absolute;
+      right: 100%;
+      top: 5px;
+      border: 20px solid transparent; 
+      border-right: 65px solid #f00; 
+  }
+</style>
+<body>
+  <div class="wrapper">
+      <div class="flag">
+          <div class="toothpick"></div>
+          <div class="gray_cap"></div>
+          <div class="black_cap"></div>
+      </div>
+      <div class="body">
+          <div class="white_bun"></div>
+          <div class="ketchup"></div>
+          <div class="cutlet"></div>
+          <div class="black_bun"></div>
+          <div class="spicy_meatballs">
+              <div class="spicy_meatballs__meatball"></div>
+              <div class="spicy_meatballs__meatball"></div>
+              <div class="spicy_meatballs__meatball"></div>
+          </div>
+      </div>
+  </div>
+</body>
