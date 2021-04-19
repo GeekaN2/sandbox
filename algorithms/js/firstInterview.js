@@ -70,7 +70,6 @@ function getBanner(list) {
     
     // myBanners: [{w: 10, banner: {id: 1}}, {w: 140, banner: {id: 2}}, ..];
     
-    
     for (let i = 0; i < list.length; i++) {
         let banner = list[i];
 
