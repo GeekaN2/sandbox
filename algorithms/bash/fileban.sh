@@ -21,40 +21,37 @@ case $i in
 esac
 done
 
+# Take access to files
 function banread {
     IFS=$'\n'
     cat ./templates.csv | while read template; do
-        echo "Ban read: $template";
-        
-        IFS=$'\n'; set -f
         findFiles="find . -name ${template}"
         
         for f in $(eval "$findFiles"); do
             chmod 700 "$f";
+            echo "Ban read: $f";
         done
-        
-        unset IFS; set +f
     done
+    unset IFS;
 }
 
+# Returning access to files
 function unbanread {
     IFS=$'\n'
     cat ./templates.csv | while read template; do
-        echo "Unban read: $template";
-        
-        IFS=$'\n'; set -f
         findFiles="find . -name ${template}"
         
         for f in $(eval "$findFiles"); do
             chmod 777 "$f";
+            echo "Unban read: $f";
         done
-        
-        unset IFS; set +f
     done
+    unset IFS;
 }
 
 pass=$(echo "$password" | sha256sum)
 
+# Comparing passwords
 if [[ "${pass:0:64}" == "$hashedPassword" ]]; then
     unbanread
 else
