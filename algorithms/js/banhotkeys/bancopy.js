@@ -38,7 +38,11 @@ async function isValidPassword(password) {
  * @returns {boolean}
  */
 function keydownListener(event) {
-  if (event.key === 'S' && event.ctrlKey) return false;
+  console.log(event);
+  if (event.key === 's' && (event.ctrlKey || event.metaKey)) {
+    event.preventDefault();
+    return false;
+  }
 
   return true;
 }
