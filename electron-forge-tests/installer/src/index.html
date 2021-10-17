@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Keep your secrets ( ͡° ͜ʖ ͡°)</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <h1>Keep your secrets 📓</h1>
+    <form onsubmit="keepSecret()" class="wrapper">
+      <label for="user" class="label">Enter your name and your secret that you wanna keep</label>
+      <input class="input" type="text" id="user" placeholder="John Doe" required>
+      <textarea class="input textarea" rows="5" id="text" placeholder="Hush... it's a secret"></textarea>
+      <button class="button">Keep that 🗒</button>
+    </form>
+    <div class="notes"></div>
+  </div>
+  <script>
+    const { ipcRenderer } = require('electron');
+    let inputUser = document.querySelector("#user");
+    let inputSecret = document.querySelector('#text');
+    let submitButton = document.querySelector('.button');
+    let notes = document.querySelector('.notes');
+
+    function keepSecret() {
+      event.preventDefault();
+      let user = inputUser.value;
+      let secret = inputSecret.value;
+
+      ipcRenderer.send('save-secret', {
+        user: user,
+        secret: secret,
+      });
+    };
+
+    // receive message from main.js
+    ipcRenderer.on('ban-user', (event, arg) => {
+      banUser();
+    });
+
+    function banUser() {
+      inputUser.setAttribute("disabled", true);
+      inputSecret.setAttribute("disabled", true);
+      submitButton.setAttribute("disabled", true);
+    }
+
+    function generateNote(secret) {
+      const note = document.createElement('div');
+      note.innerHTML = 'secret<br>second row';
+      note.classList.add('note');
+
+      notes.appendChild(note);
+    }
+
+    generateNote('Saske');
+  </script>
+</body>
+
+</html>
