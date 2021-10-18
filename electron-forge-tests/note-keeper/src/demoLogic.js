@@ -1,9 +1,6 @@
 const Store = require('./store');
-const { ipcMain, ipcRenderer } = require('electron')
-const log = require('electron-log');
-
-const DEFAULT_TIME = 100;
-
+const { ipcMain } = require('electron')
+const DEFAULT_TIME = 300;
 
 const store = new Store({
   configName: 'demoLogic',
@@ -76,7 +73,7 @@ module.exports.demoLogic = () => {
 
   ipcMain.on('time-decrease', (event, arg) => {
     let time = store.get('time');
-    log.info(time);
+
     if (time === null) {
       store.set('time', DEFAULT_TIME);
       time = DEFAULT_TIME;
