@@ -1,8 +1,8 @@
 {
-  "name": "installer",
-  "productName": "installer",
+  "name": "note-keeper",
+  "productName": "note-keeper",
   "version": "1.0.0",
-  "description": "Just a second lab for programming classes",
+  "description": "Keep your secrets, demo version",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
