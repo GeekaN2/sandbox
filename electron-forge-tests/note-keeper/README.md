@@ -20,3 +20,5 @@ yarn make
 ```
 
 The application has a limit on the number of notes saved by the user and has a time limit. You cannot create a note if some of the limits are exceeded.
+
+![Application](./images/application_screenshot.png)
