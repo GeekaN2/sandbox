@@ -1,0 +1,26 @@
+@import url(./reset.css);
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
+
+body {
+	box-sizing: border-box;
+	height: 100vh;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 40px;
+	background: #000;
+}
+
+.input {
+    outline: none;
+    padding: 5px;
+    width: 200px;
+    height: 20px;
+    border: none;
+    background: #fff;
+    --smooth-corners: 20, 3;
+    mask-image: paint(smooth-corners);
+    -webkit-mask-image: paint(smooth-corners)
+}
