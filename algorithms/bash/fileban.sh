@@ -1,7 +1,7 @@
 #!/bin/bash
 # loop through all files in current directory
 
-hashedPassword="9e5763031b54ca938ba75dcf32e82d6976d74204ceb3ef31c54a6213624c07f0"
+hashedPassword="2c8e2a73a7f870edeb0453ef2e85720676674a0399abb5827aa5f447f0a2ade6"
 
 # Script help
 if [[ "$1" =~ ^-h|--help$ ]] ; then
@@ -29,6 +29,7 @@ function banread {
         
         for f in $(eval "$findFiles"); do
             chmod 700 "$f";
+            sudo chflags -R simmutable "$f";
             echo "Ban read: $f";
         done
     done
@@ -42,6 +43,7 @@ function unbanread {
         findFiles="find . -name ${template}"
         
         for f in $(eval "$findFiles"); do
+            sudo chflags -R nosimmutable "$f";
             chmod 777 "$f";
             echo "Unban read: $f";
         done
@@ -49,7 +51,7 @@ function unbanread {
     unset IFS;
 }
 
-pass=$(echo "$password" | sha256sum)
+pass=$(echo "$password" | shasum -a 256)
 
 # Comparing passwords
 if [[ "${pass:0:64}" == "$hashedPassword" ]]; then
