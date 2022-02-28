@@ -12,7 +12,8 @@ const apps = [
   'Reminder',
   'Notes',
   'Music',
-  'QuickTime Player'
+  'QuickTime Player',
+  null
 ];
 
 interface UpdateApp {
@@ -27,11 +28,13 @@ export const updateApps = async ({
 
     setUpdatingApp(app);
 
-    await updateApp(app);
+    if (app) {
+      await updateApp();
+    }
   }
 }
 
-const updateApp = async (appName: string) => {
+const updateApp = async () => {
   const timeToUpdate = Math.floor(Math.random() * 10 * 1000 + 2 * 1000);
 
   await sleep(timeToUpdate);

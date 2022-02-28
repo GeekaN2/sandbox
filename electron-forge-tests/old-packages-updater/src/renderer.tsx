@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 
 export interface IElectronAPI {
-  loadPreferences: () => Promise<void>,
+  sendData: () => Promise<void>,
 }
 
 declare global {
