@@ -1,6 +1,14 @@
 // worker
+const WebSocket = require('ws');
+// worker
 
-const errorFormatted = {
+const generateContext = () => {
+  const lyrics = ['Never gonna give you up', 'Never gonna let you down', 'Never gonna run around and desert you', 'Never gonna make you cry', 'Never gonna say goodbye', 'Never gonna tell a lie and hurt you', 'Never gonna give you up', 'Never gonna let you down', 'Never gonna run around and desert you', 'Never gonna make you cry', 'Never gonna say goodbye', 'Never gonna tell a lie and hurt you'];
+
+  return lyrics[Math.floor(Math.random() * lyrics.length)];
+}
+
+const getErrorFormatted = () => ({
   "token": "eyJpbnRlZ3JhdGlvbklkIjoiOWMzZjkxODQtZmI1ZS00MmJjLWE0Y2UtYzFlNjQwOWIzOTdhIiwic2VjcmV0IjoiYjE2MjU1MDAtY2IyYi00NjhlLWI2MzgtODViYzlmN2EwZTU0In0=",
   "catcherType": "errors/javascript",
   "payload": {
@@ -8,7 +16,7 @@ const errorFormatted = {
     "type": "TypeError",
     "release": null,
     "context": {
-      "rootContextSample": "10000"
+      "rootContextSample": generateContext(),
     },
     "user": {
       "id": "FmDjGOx9fDZJtfQp073qCuRxpkWMIpaGMMUJedxT"
@@ -31,12 +39,11 @@ const errorFormatted = {
       }
     ]
   }
-}
-
+})
 
 const getIntegrationId = () => {
   try {
-    const decodedIntegrationToken = JSON.parse(atob(errorFormatted.token));
+    const decodedIntegrationToken = JSON.parse(atob(getErrorFormatted().token));
     const { integrationId } = decodedIntegrationToken;
 
     if (!integrationId || integrationId === '') {
@@ -213,8 +220,20 @@ let transport = new Socket({
   },
 });
 
+const numberOfError = Math.floor(Math.random() * 20) + 1;
 
-transport.send(errorFormatted)
-  .catch((sendingError) => {
-    console.log('WebSocket sending error', 'error', sendingError);
-  });
+for (let i = 0; i < numberOfError; i++) {
+  const errorFormatted = getErrorFormatted();
+
+  transport.send(errorFormatted)
+    .catch((sendingError) => {
+      console.log('WebSocket sending error', 'error', sendingError);
+    });
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(() => { process.exit(1)}, ms));
+}
+
+sleep(10000);
+
