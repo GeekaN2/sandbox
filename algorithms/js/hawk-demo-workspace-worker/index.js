@@ -43,7 +43,7 @@ const getErrorFormatted = () => ({
 
 const getIntegrationId = () => {
   try {
-    const decodedIntegrationToken = JSON.parse(atob(getErrorFormatted().token));
+    const decodedIntegrationToken = JSON.parse(atob('eyJpbnRlZ3JhdGlvbklkIjoiOWMzZjkxODQtZmI1ZS00MmJjLWE0Y2UtYzFlNjQwOWIzOTdhIiwic2VjcmV0IjoiYjE2MjU1MDAtY2IyYi00NjhlLWI2MzgtODViYzlmN2EwZTU0In0='));
     const { integrationId } = decodedIntegrationToken;
 
     if (!integrationId || integrationId === '') {
@@ -57,16 +57,6 @@ const getIntegrationId = () => {
 }
 
 class Socket {
-  url;
-  onMessage;
-  onOpen;
-  onClose;
-  eventsQueue;
-  ws;
-  reconnectionTimer;
-  reconnectionTimeout;
-  reconnectionAttempts;
-
   constructor({
     collectorEndpoint,
     onMessage = (message) => { },
