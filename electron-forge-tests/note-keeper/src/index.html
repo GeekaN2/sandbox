@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Keep your secrets ( ͡° ͜ʖ ͡°)</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <h1>Keep your secrets 📓</h1>
+    <form onsubmit="keepSecret()" class="wrapper">
+      <label for="user" class="label">Enter your name and your secret that you wanna keep</label>
+      <div class="time-limit none">Your time is over, please buy a pro version or restart the app</div>
+      <div class="notes-limit none">Your've reached the maximum of notes. Buy a pro version for infinite notes.</div>
+      <input class="input" type="text" id="user" placeholder="John Doe" required>
+      <textarea class="input textarea" rows="5" id="text" placeholder="Hush... it's a secret"></textarea>
+      <button class="button">Keep that 🗒</button>
+    </form>
+    <div class="notes"></div>
+  </div>
+  <script>
+    const { ipcRenderer } = require('electron');
+    let inputUser = document.querySelector("#user");
+    let inputSecret = document.querySelector('#text');
+    let submitButton = document.querySelector('.button');
+    let notes = document.querySelector('.notes');
+    let timeLimitBlock = document.querySelector('.time-limit');
+    let notesLimitBlock = document.querySelector('.notes-limit');
+
+    function keepSecret() {
+      event.preventDefault();
+      let user = inputUser.value;
+      let secret = inputSecret.value;
+
+      ipcRenderer.send('save-secret', {
+        user: user,
+        secret: secret,
+      });
+    };
+
+    ipcRenderer.on('ban-user', (event, arg) => {
+      banUser();
+      notesLimitBlock.classList.remove('none');
+    });
+
+    ipcRenderer.on('show-secrets', (event, arg) => {
+      const { secrets, user } = arg;
+
+      notes.innerHTML = '';
+      secrets.forEach(secret => generateNote(secret, user));
+    });
+
+    const timeCounter = setInterval(() => {
+      ipcRenderer.send('time-decrease');
+    }, 1000);
+    
+    ipcRenderer.on('on-time-exceeded', (event, arg) => {
+      banUser();
+      timeLimitBlock.classList.remove('none');
+      clearInterval(timeCounter);
+    });
+
+    function banUser() {
+      inputUser.setAttribute("disabled", true);
+      inputSecret.setAttribute("disabled", true);
+      submitButton.setAttribute("disabled", true);
+    }
+
+    function generateNote(secret, user) {
+      const note = document.createElement('div');
+      note.innerHTML = `${secret}<div class="author">${user}</div>`;
+      note.classList.add('note');
+
+      notes.appendChild(note);
+    }
+    
+  </script>
+</body>
+
+</html>

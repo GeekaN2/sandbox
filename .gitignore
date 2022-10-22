@@ -1,5 +1,29 @@
 node_modules
 
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 .env
 
 .vs
+algorithms/dns-subdomains-checker/words.txt
+algorithms/dns-subdomains-checker/subdomainsFrom169.txt
+algorithms/dns-subdomains-checker/subdomains-top1million-110000.txt
+algorithms/dns-subdomains-checker/words_alpha.txt
+algorithms/dns-subdomains-checker/bitquark_subdomains_top100K.txt

@@ -1,25 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Add React in One Minute</title>
-  </head>
-  <body>
 
-    <h2>Add React in One Minute</h2>
-    <p>This page demonstrates using React with no build tooling.</p>
-    <p>React is loaded as a script tag.</p>
+<head>
+  <meta charset="UTF-8" />
+  <title>Add React in One Minute</title>
+</head>
 
-    <!-- We will put our React component inside this div. -->
-    <div id="timer_container"></div>
+<body>
+  <!-- We will put our React component inside this div. -->
+  <div id="main"></div>
 
-    <!-- Load React. -->
-    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <!-- Load React. -->
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
-    <!-- Load our React component. -->
-    <script src="like_button.js"></script>
+  <!-- Load our React component. -->
+  <script type="text/babel">
+    const domContainer = document.querySelector('#main');
 
-  </body>
+    class LoggingButton extends React.Component {
+
+      handleClick() { 
+        console.log('значение this:', this); 
+      }
+      // Такой синтаксис гарантирует, что `this` привязан к handleClick.  // Предупреждение: это экспериментальный синтаксис  handleClick = () => {    console.log('значение this:', this);  }
+      render() {
+        return (
+          <button onClick={this.handleClick.bind(this )}>
+            Нажми на меня
+          </button>
+        );
+      }
+    }
+
+    ReactDOM.render(
+      <LoggingButton />,
+      domContainer
+    );
+  </script>
+
+</body>
+
 </html>

@@ -1,23 +1,8 @@
+
 'use strict';
+const domContainer = document.querySelector('#main');
 
-const e = React.createElement;
-
-class Timer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      seconds: Date.now()
-    }
-  }
-
-  render() {
-    return e(
-      'div',
-      { onClick: () => this.setState({ liked: true }) },
-      'Like'
-    );
-  }
-}
-
-const domContainer = document.querySelector('#timer_container');
-ReactDOM.render(e(LikeButton), domContainer);
+ReactDOM.render(
+  <h1>Hello, world!</h1>,
+  domContainer
+);
